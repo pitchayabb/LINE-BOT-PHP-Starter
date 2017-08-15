@@ -3,7 +3,6 @@
 $strAccessToken = "rQy/kEpoG83KSi4thyZWyJXLHehNr1N23BStJ2BkJzWBWgvYIkhFfCXYQ9swg4KqfRcDQ6zsVUn328rdLUvWT35NPBUGru6c0QdXG7BPkP2+82nZPwZq/XVY26j19OnZFJQPH2YrYLLra83icEQ8LAdB04t89/1O/w1cDnyilFU=";
  
 $content = file_get_contents('php://input');
-$arrJson = json_decode($content, true);
  
 $strUrl = "https://api.line.me/v2/bot/message/reply";
  
@@ -15,7 +14,7 @@ if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId']."<br/>Type ".$arrJson['events'][0]['source']['type']."<br/>replyToken ".$arrJson['events'][0]['replyToken']."<br/>timestamp ".$arrJson['events'][0]['timestamp'];
+  $arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId']." Type ".$arrJson['events'][0]['source']['type']." replyToken ".$arrJson['events'][0]['replyToken']." timestamp ".$arrJson['events'][0]['timestamp']." timestamp ".$arrJson['events'][0]['timestamp'];
 }else if($arrJson['events'][0]['message']['text'] == "ชื่ออะไร"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
@@ -37,6 +36,11 @@ if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
   $arrPostData['messages'][0]['type'] = "text";
   $arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'].$arrJson['events'][0]['source']['type'].$arrJson['events'][0]['replyToken'];
 }
+
+  $arrPostData['messages'][1]['type'] = "text";
+  $arrPostData['messages'][1]['text'] = $arrJson['events'][0]['message']['type'];
+
+
  
  
 $ch = curl_init();
