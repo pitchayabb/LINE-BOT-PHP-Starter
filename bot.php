@@ -37,8 +37,8 @@ if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
   $arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'].$arrJson['events'][0]['source']['type'].$arrJson['events'][0]['replyToken'];
 }
 
-  $arrPostData['messages'][1]['type'] = "text";
-  $arrPostData['messages'][1]['text'] = $arrJson['events'][0]['message']['type'];
+  $arrPostData['messages'][0]['type'] = "text";
+  $arrPostData['messages'][0]['text'] = $arrJson['events'][0]['message']['type'];
 
 
  
