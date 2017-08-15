@@ -16,20 +16,35 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
-			$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
-			$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'd3e25af94bee33d81afb9130fd7418cf']);
-			$response = $bot->getProfile($event['source']['userId']);
-			if ($response->isSucceeded()) {
-			    $profile = $response->getJSONDecodedBody();
-			    echo $profile['displayName'];
-			    echo $profile['pictureUrl'];
-			    echo $profile['statusMessage'];
-			}
+			$arrHeader = array();
+			$arrHeader[] = "Content-Type: application/json";
+			$arrHeader[] = "Authorization: Bearer {$strAccessToken}";
+			 
+			$id_in = $event['source']['userId'];
+			$strUrl = "https://api.line.me/v2/bot/profile/".$id_in;
+			 
+			 
+			$ch1 = curl_init();
+			curl_setopt($ch1, CURLOPT_URL,$strUrl);
+			curl_setopt($ch1, CURLOPT_HEADER, false);
+			curl_setopt($ch1, CURLOPT_HTTPHEADER, $arrHeader);
+			curl_setopt($ch1, CURLOPT_RETURNTRANSFER,true);
+			curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+			$result1 = curl_exec($ch1);
+			$result1 = json_decode($result1, true); 
+				//echo "profile : ".
+				$result1['displayName'];
+				//echo "<br/>pictureUrl : ".
+				$result1['pictureUrl'];
+				//echo "<br/>statusMessage : ".
+				$result1['statusMessage'];
+
+			curl_close ($ch1);
 
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => $event['source']['userId'].' msg '.$event['message']['id'].' displayName '.$profile['pictureUrl']
+				'text' => $event['source']['userId'].' msg '.$event['message']['id'].' pictureUrl '.$result1['source']['pictureUrl']
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
