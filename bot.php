@@ -15,7 +15,7 @@ if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId']." Type ".$arrJson['events'][0]['source']['type']." replyToken ".$arrJson['events'][0]['replyToken']." timestamp ".$arrJson['events'][0]['timestamp'];
+  $arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId']."<br/>Type ".$arrJson['events'][0]['source']['type']."<br/>replyToken ".$arrJson['events'][0]['replyToken']."<br/>timestamp ".$arrJson['events'][0]['timestamp'];
 }else if($arrJson['events'][0]['message']['text'] == "ชื่ออะไร"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
