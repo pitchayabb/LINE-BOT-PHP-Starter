@@ -3,6 +3,7 @@
 $strAccessToken = "rQy/kEpoG83KSi4thyZWyJXLHehNr1N23BStJ2BkJzWBWgvYIkhFfCXYQ9swg4KqfRcDQ6zsVUn328rdLUvWT35NPBUGru6c0QdXG7BPkP2+82nZPwZq/XVY26j19OnZFJQPH2YrYLLra83icEQ8LAdB04t89/1O/w1cDnyilFU=";
  
 $content = file_get_contents('php://input');
+$arrJson = json_decode($content, true);
  
 $strUrl = "https://api.line.me/v2/bot/message/reply";
  
@@ -14,7 +15,7 @@ if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId']." Type ".$arrJson['events'][0]['source']['type']." replyToken ".$arrJson['events'][0]['replyToken']." timestamp ".$arrJson['events'][0]['timestamp']." timestamp ".$arrJson['events'][0]['timestamp']." type ".$arrJson['events'][0]['type'];
+  $arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'].$arrJson['events'][0]['source']['userId'];
 }else if($arrJson['events'][0]['message']['text'] == "ชื่ออะไร"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
@@ -34,7 +35,7 @@ if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'].$arrJson['events'][0]['source']['type'].$arrJson['events'][0]['replyToken'];
+  $arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
 }
  
  
@@ -47,7 +48,12 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrPostData));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($ch);
-  
+      if(curl_error($ch)){ 
+        echo 'error:' . curl_error($ch); 
+      }else{ 
+        $result_ = json_decode($result, true); 
+        echo "status : ".$result_['status']; echo "message : ". $result_['message'];
+      } 
 curl_close ($ch);
  
 ?>
