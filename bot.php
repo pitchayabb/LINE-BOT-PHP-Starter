@@ -18,7 +18,7 @@ if (!is_null($events['events'])) {
 
 			$arrHeader = array();
 			$arrHeader[] = "Content-Type: application/json";
-			$arrHeader[] = "Authorization: Bearer {$strAccessToken}";
+			$arrHeader[] = "Authorization: Bearer {$access_token}";
 			 
 			$id_in = $event['source']['userId'];
 			$strUrl = "https://api.line.me/v2/bot/profile/".$id_in;
