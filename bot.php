@@ -1,4 +1,4 @@
-<?php
+	<?php
 $access_token = 'rQy/kEpoG83KSi4thyZWyJXLHehNr1N23BStJ2BkJzWBWgvYIkhFfCXYQ9swg4KqfRcDQ6zsVUn328rdLUvWT35NPBUGru6c0QdXG7BPkP2+82nZPwZq/XVY26j19OnZFJQPH2YrYLLra83icEQ8LAdB04t89/1O/w1cDnyilFU=';
 
 // Get POST body content
@@ -32,7 +32,7 @@ if (!is_null($events['events'])) {
 			curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
 			$result1 = curl_exec($ch1);
 			$result1 = json_decode($result1, true); 
-				//echo "profile : ".
+				echo "profile : ".
 				$result1['displayName'];
 				//echo "<br/>pictureUrl : ".
 				$result1['pictureUrl'];
