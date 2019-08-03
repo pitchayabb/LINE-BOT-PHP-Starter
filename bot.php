@@ -32,7 +32,7 @@ if (!is_null($events['events'])) {
 			curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
 			$result1 = curl_exec($ch1);
 			$result1 = json_decode($result1, true); 
-				echo "profile : ".
+				//echo "profile : ".
 				$result1['displayName'];
 				//echo "<br/>pictureUrl : ".
 				$result1['pictureUrl'];
